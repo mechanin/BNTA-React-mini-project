@@ -1,16 +1,19 @@
-const BucketCreator = () => {
+const BucketCreator = ({countries}) => {
+
+    countries.sort();
+
+    var options = countries.map((country) => {
+        return <option value={country}>{country}</option>
+    })
 
     return (
         <>
         <h2>Add a new Bucket</h2>
         <form>
             <div>
-                <label for="cars">Choose a car: </label>
-                <select id="cars" name="cars">
-                <option value="country">Country Goes Here</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
+                <label>Country: </label>
+                <select name="cars" id="cars">
+                    {options}
                 </select>
             </div>
             <div>
