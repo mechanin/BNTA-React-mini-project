@@ -16,18 +16,30 @@ const BucketContainer = () => {
         .then(data => setCountries(data))
     }
 
+    const getCountryDetails = (country) => {
+        console.log("Getting Countries details")
+        fetch(`https://restcountries.com/v3.1/name/${country}`)
+        .then(response => response.json())
+        .then(data=>data.map(country => [country.capital, country.currencies, country.population]))
+    } 
+
     useEffect(() => {
         setBuckets(BucketItems)
     }, []);
 
     useEffect(getCountries, []);
+
+    const addNewBucket = (newBucket) => {
+        newBucket.id = buckets.length + 1;
+        setBuckets([...buckets, newBucket])
+    }
    
     console.log(countries)
 
     return(
         buckets.length > 0 ?
         <>
-        <BucketCreator countries={countries}/>
+        <BucketCreator countries={countries} onBucketSubmission={addNewBucket} countryDetails={getCountryDetails}/>
         <hr/>
         <BucketList buckets={BucketItems}/>
         </>
