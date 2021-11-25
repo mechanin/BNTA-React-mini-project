@@ -40,16 +40,20 @@ const BucketContainer = () => {
     return(
         buckets.length > 0 ?
         <>
+        <div >
         {/* Form */}
         <BucketCreator countries={allCountries} onBucketSubmission={addNewBucket}/>
         <hr/>
         <BucketList buckets={buckets} onBucketUpdate = {updateBucket}/>
+        </div>
         </>
         :
         <>
+        <div>
         <BucketCreator countries={allCountries} onBucketSubmission={addNewBucket}/>
-        <hr/>
-        <p>Loading Buckets</p>
+        
+        <p class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline focus:outline-none text-white text-cs py-3 px-4 rounded font-bold">Loading Buckets</p>
+        </div>
         </>
     )
 
