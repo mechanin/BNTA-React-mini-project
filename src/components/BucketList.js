@@ -1,16 +1,19 @@
 import Bucket from "./Bucket";
 
-const BucketList = ({buckets}) =>{
+const BucketList = ({buckets,onBucketUpdate}) =>{
 
     const bucketComponents = buckets.map(bucket => {
         return(
-            <Bucket bucket={bucket} key={bucket.id}/>
+            <Bucket bucket={bucket} key={bucket.id} onButtonClick = {onBucketUpdate}/>
         )
     })
 
     return(
-        <div>
+        <div class="container mx-auto ">
+        <div class="flex flex-wrap">
+            
             {bucketComponents}
+        </div>
         </div>
     )
 

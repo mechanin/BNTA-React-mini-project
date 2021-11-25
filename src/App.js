@@ -1,13 +1,14 @@
 import './App.css';
 import BucketContainer from './containers/BucketContainer';
-
 function App() {
   return (
     <>
-    <h1>BucketList React App</h1>
+    <div>
+    <h1 class="text-3xl font-semibold text-center text-indigo-900 p-6">myBucketList</h1>
+
     <BucketContainer />
+    </div>
     </>
   );
 }
-
 export default App;
