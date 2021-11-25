@@ -97,7 +97,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
                 </div>
                 <div>
                   <span class="w-1/2">
-                    <img src={flag} alt={country.name}/>
+                    <img src={flag} alt={country.name} class="rounded-t-2xl object-contain h-40 w-full ..."/>
                     <p
                       class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold"

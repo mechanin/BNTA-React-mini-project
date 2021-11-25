@@ -21,7 +21,6 @@ const BucketContainer = () => {
 
     useEffect(getCountries, []);
 
-
     const addNewBucket = (newBucket) => {
         newBucket.id = buckets.length + 1;
         setBuckets([...buckets, newBucket])
