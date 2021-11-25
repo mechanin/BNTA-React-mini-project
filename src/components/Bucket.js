@@ -2,7 +2,9 @@ const Bucket = ({bucket}) => {
 
     return(
         <div>
+            
             <h2>Location</h2>
+            <img src={bucket.flag} alt={bucket.country} />
             <h3>Country</h3>
             <p>{bucket.country}</p>
             <h4>Capital</h4>
