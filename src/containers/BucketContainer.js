@@ -7,8 +7,6 @@ const BucketContainer = () => {
 
     const [buckets, setBuckets] = useState([]);
     const [allCountries, setAllCountries] = useState([])
-    const [allCountriesNames, setAllCountryNames] = useState([])
-    const [selectedCountryData, setSelectedCountryData] = useState([])
 
     const getCountries = () => {
         console.log("Getting Initial List Of Countries")
@@ -23,29 +21,18 @@ const BucketContainer = () => {
 
     useEffect(getCountries, []);
 
-    const getCountryNames = () => {
-    setAllCountryNames(allCountries.map(country=>country.name.common).sort());
-    }
-
-    useEffect(getCountryNames, [allCountries]);
 
     const addNewBucket = (newBucket) => {
         newBucket.id = buckets.length + 1;
         setBuckets([...buckets, newBucket])
     }
    
-    // console.log(allCountries)
-
-    const getCountryData = (name) => {
-        const selectedCountry = allCountries.find(country => country.name.common === name);
-        setSelectedCountryData(selectedCountry);
-    }
 
     return(
         buckets.length > 0 ?
         <>
         {/* Form */}
-        <BucketCreator countryNames={allCountriesNames} onClickCountryData = {getCountryData} currentCountryData = {selectedCountryData} onBucketSubmission={addNewBucket}/>
+        <BucketCreator countries={allCountries} onBucketSubmission={addNewBucket}/>
         <hr/>
         <BucketList buckets={BucketItems}/>
         </>

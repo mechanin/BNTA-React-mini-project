@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const BucketCreator = ({countryNames, onClickCountryData, currentCountryData, onBucketSubmission}) => {
+const BucketCreator = ({countries, onBucketSubmission}) => {
     
 
     const [country, setCountry] = useState("");
@@ -11,14 +11,17 @@ const BucketCreator = ({countryNames, onClickCountryData, currentCountryData, on
     const [description, setDescription] = useState("");
 
     const handleCountryChange = (event) => {
-        onClickCountryData(event.target.value);
-        console.log("handleCountryChange EventTargetValue: " + event.target.value);
         setCountry(event.target.value);
+        
+        const selectedCountry = countries.find(country => country.name.common === event.target.value);
+    
+        console.log("handleCountryChange EventTargetValue: " + event.target.value);
+        
         console.log("handleCountryChange country: " + country);
         
-
-        setCapital(currentCountryData.capital[0]);
-        // console.log("handleCountryChange capital: " + currentCountryData.capital[0]);
+        setCapital(selectedCountry.capital[0]);
+        setPopulation(selectedCountry.population);
+        setCurrency(selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]);
     }
 
     const handleGoalChange = (event) => {
@@ -32,9 +35,7 @@ const BucketCreator = ({countryNames, onClickCountryData, currentCountryData, on
     const handleFormSubmission = (event) => {
         event.preventDefault();
 
-        setCapital()
     
-
         const newBucket = {
             country: country,
             capital: capital,
@@ -51,7 +52,8 @@ const BucketCreator = ({countryNames, onClickCountryData, currentCountryData, on
         setGoal("");
         setDescription("");
     }
-
+    var countryNames = countries.map(country=>country.name.common).sort()
+    
     var options = countryNames.map((country) => {
         return <option value={country}>{country}</option>
     })
