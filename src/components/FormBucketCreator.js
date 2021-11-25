@@ -178,7 +178,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
                     >
                       Population: {population}
                     </p>
-                    <a class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
+                    <a class="hover:bg-blue-200 text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold" href={location} target="_blank">Open In Maps</a>
                   </span>
                 </div>

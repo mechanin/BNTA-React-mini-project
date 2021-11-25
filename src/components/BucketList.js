@@ -1,10 +1,10 @@
 import Bucket from "./Bucket";
 
-const BucketList = ({buckets}) =>{
+const BucketList = ({buckets,onBucketUpdate}) =>{
 
     const bucketComponents = buckets.map(bucket => {
         return(
-            <Bucket bucket={bucket} key={bucket.id}/>
+            <Bucket bucket={bucket} key={bucket.id} onButtonClick = {onBucketUpdate}/>
         )
     })
 
