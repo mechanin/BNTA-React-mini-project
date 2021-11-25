@@ -1,27 +1,21 @@
 import {useState,useEffect} from 'react';
 import BucketList from "../components/BucketList.js"
 import BucketItems from '../BucketItems.js';
-import BucketCreator from '../components/BucketCreator.js';
+import BucketCreator from '../components/FormBucketCreator.js';
 
 const BucketContainer = () => {
 
     const [buckets, setBuckets] = useState([]);
-    const [countries, setCountries] = useState([])
+    const [allCountries, setAllCountries] = useState([])
+    const [allCountriesNames, setAllCountryNames] = useState([])
+    const [selectedCountryData, setSelectedCountryData] = useState([])
 
     const getCountries = () => {
         console.log("Getting Initial List Of Countries")
         fetch("https://restcountries.com/v3.1/all")
         .then(response => response.json())
-        .then(data=>data.map(country=>country.name.common))
-        .then(data => setCountries(data))
+        .then(data => setAllCountries(data))
     }
-
-    const getCountryDetails = (country) => {
-        console.log("Getting Countries details")
-        fetch(`https://restcountries.com/v3.1/name/${country}`)
-        .then(response => response.json())
-        .then(data=>data.map(country => [country.capital, country.currencies, country.population]))
-    } 
 
     useEffect(() => {
         setBuckets(BucketItems)
@@ -29,17 +23,30 @@ const BucketContainer = () => {
 
     useEffect(getCountries, []);
 
+    const getCountryNames = () => {
+    setAllCountryNames(allCountries.map(country=>country.name.common));
+    }
+
+    useEffect(getCountryNames, [allCountries]);
+
     const addNewBucket = (newBucket) => {
         newBucket.id = buckets.length + 1;
         setBuckets([...buckets, newBucket])
     }
    
-    console.log(countries)
+    // console.log(allCountries)
+
+    const getCountryData = (name) => {
+        const selectedCountry = allCountries.find(country => country.name.common === name);
+        setSelectedCountryData(selectedCountry);
+        console.log("LOG CAPITAL " +selectedCountryData.capital[0]);
+    }
 
     return(
         buckets.length > 0 ?
         <>
-        <BucketCreator countries={countries} onBucketSubmission={addNewBucket} countryDetails={getCountryDetails}/>
+        {/* Form */}
+        <BucketCreator countryNames={allCountriesNames} onClickCountryData = {getCountryData} onBucketSubmission={addNewBucket}/>
         <hr/>
         <BucketList buckets={BucketItems}/>
         </>
