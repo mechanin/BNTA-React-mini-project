@@ -21,7 +21,10 @@ const BucketCreator = ({countries, onBucketSubmission}) => {
         
         setCapital(selectedCountry.capital[0]);
         setPopulation(selectedCountry.population);
-        setCurrency(selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]);
+        setCurrency(
+            selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]].name 
+            + " ("+selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]].symbol+")"
+            );
     }
 
     const handleGoalChange = (event) => {
@@ -37,6 +40,7 @@ const BucketCreator = ({countries, onBucketSubmission}) => {
 
     
         const newBucket = {
+            id: null,
             country: country,
             capital: capital,
             currency: currency,
@@ -49,6 +53,9 @@ const BucketCreator = ({countries, onBucketSubmission}) => {
         onBucketSubmission(newBucket);
 
         setCountry("");
+        setCapital("");
+        setPopulation("");
+        setCurrency("");
         setGoal("");
         setDescription("");
     }
@@ -67,6 +74,11 @@ const BucketCreator = ({countries, onBucketSubmission}) => {
                 <select name="countries" value={country} onChange={handleCountryChange.bind(this)}>
                     {options}
                 </select>
+            </div>
+            <div>
+            <p>Capital: {capital}</p>
+            <p>Currency: {currency}</p>
+            <p>Population: {population}</p>
             </div>
             <div>
                 <label>Goal: </label>

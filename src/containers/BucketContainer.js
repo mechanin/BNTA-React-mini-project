@@ -34,7 +34,7 @@ const BucketContainer = () => {
         {/* Form */}
         <BucketCreator countries={allCountries} onBucketSubmission={addNewBucket}/>
         <hr/>
-        <BucketList buckets={BucketItems}/>
+        <BucketList buckets={buckets}/>
         </>
         :
         <p>Loading Buckets</p>
