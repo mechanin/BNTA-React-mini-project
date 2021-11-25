@@ -24,7 +24,7 @@ const BucketContainer = () => {
     useEffect(getCountries, []);
 
     const getCountryNames = () => {
-    setAllCountryNames(allCountries.map(country=>country.name.common));
+    setAllCountryNames(allCountries.map(country=>country.name.common).sort());
     }
 
     useEffect(getCountryNames, [allCountries]);
@@ -39,14 +39,13 @@ const BucketContainer = () => {
     const getCountryData = (name) => {
         const selectedCountry = allCountries.find(country => country.name.common === name);
         setSelectedCountryData(selectedCountry);
-        console.log("LOG CAPITAL " +selectedCountryData.capital[0]);
     }
 
     return(
         buckets.length > 0 ?
         <>
         {/* Form */}
-        <BucketCreator countryNames={allCountriesNames} onClickCountryData = {getCountryData} onBucketSubmission={addNewBucket}/>
+        <BucketCreator countryNames={allCountriesNames} onClickCountryData = {getCountryData} currentCountryData = {selectedCountryData} onBucketSubmission={addNewBucket}/>
         <hr/>
         <BucketList buckets={BucketItems}/>
         </>

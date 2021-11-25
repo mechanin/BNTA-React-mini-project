@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const BucketCreator = ({countryNames, onClickCountryData, onBucketSubmission}) => {
+const BucketCreator = ({countryNames, onClickCountryData, currentCountryData, onBucketSubmission}) => {
     
 
     const [country, setCountry] = useState("");
@@ -11,9 +11,14 @@ const BucketCreator = ({countryNames, onClickCountryData, onBucketSubmission}) =
     const [description, setDescription] = useState("");
 
     const handleCountryChange = (event) => {
+        onClickCountryData(event.target.value);
+        console.log("handleCountryChange EventTargetValue: " + event.target.value);
         setCountry(event.target.value);
-        onClickCountryData(event.target.value)
-        console.log("LOG" + event.target.value)
+        console.log("handleCountryChange country: " + country);
+        
+
+        setCapital(currentCountryData.capital[0]);
+        // console.log("handleCountryChange capital: " + currentCountryData.capital[0]);
     }
 
     const handleGoalChange = (event) => {
@@ -57,7 +62,7 @@ const BucketCreator = ({countryNames, onClickCountryData, onBucketSubmission}) =
         <form onSubmit={handleFormSubmission}>
             <div>
                 <label>Country: </label>
-                <select name="countries" value={country} onChange={handleCountryChange}>
+                <select name="countries" value={country} onChange={handleCountryChange.bind(this)}>
                     {options}
                 </select>
             </div>
