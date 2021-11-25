@@ -7,6 +7,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
   const [currency, setCurrency] = useState("");
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
+  const [flag, setFlag] = useState("");
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
@@ -19,6 +20,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
 
     console.log("handleCountryChange country: " + country);
 
+    setFlag(selectedCountry.flags.svg);
     setCapital(selectedCountry.capital[0]);
     setPopulation(selectedCountry.population);
     setCurrency(
@@ -51,6 +53,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
       done: false,
       title: goal,
       body: description,
+      flag: flag
     };
 
     onBucketSubmission(newBucket);
@@ -61,6 +64,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
     setCurrency("");
     setGoal("");
     setDescription("");
+    setFlag("");
   };
   var countryNames = countries.map((country) => country.name.common).sort();
 
@@ -93,6 +97,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
                 </div>
                 <div>
                   <span class="w-1/2">
+                    <img src={flag} alt={country.name}/>
                     <p
                       class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold"
