@@ -1,6 +1,5 @@
 import './App.css';
 import BucketContainer from './containers/BucketContainer';
-
 function App() {
   return (
     <>
@@ -9,5 +8,4 @@ function App() {
     </>
   );
 }
-
 export default App;

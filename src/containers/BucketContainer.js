@@ -16,7 +16,7 @@ const BucketContainer = () => {
     }
 
     useEffect(() => {
-        setBuckets(BucketItems)
+        setBuckets([])
     }, []);
 
     useEffect(getCountries, []);
@@ -36,7 +36,11 @@ const BucketContainer = () => {
         <BucketList buckets={buckets}/>
         </>
         :
+        <>
+        <BucketCreator countries={allCountries} onBucketSubmission={addNewBucket}/>
+        <hr/>
         <p>Loading Buckets</p>
+        </>
     )
 
 }

@@ -8,6 +8,7 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
   const [flag, setFlag] = useState("");
+  const [location, setLocation] = useState("");
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
@@ -20,17 +21,75 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
 
     console.log("handleCountryChange country: " + country);
 
-    setFlag(selectedCountry.flags.svg);
-    setCapital(selectedCountry.capital[0]);
-    setPopulation(selectedCountry.population);
-    setCurrency(
-      selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]
-        .name +
-        " (" +
-        selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]
-          .symbol +
-        ")"
-    );
+    try {
+            setFlag(selectedCountry.flags.svg);
+        } catch (e) {
+            setFlag("https://www.nicepng.com/png/detail/952-9522217_image-earth-globe-transparent-background.png")
+            console.log(e instanceof TypeError)  // true
+            console.log(e.message)               // "null has no properties"
+            console.log(e.name)                  // "TypeError"
+            console.log(e.fileName)              // "Scratchpad/1"
+            console.log(e.lineNumber)            // 2
+            console.log(e.columnNumber)          // 2
+            console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+          }
+          try {
+          setLocation(selectedCountry.maps.googleMaps);
+        } catch (e) {
+            setCapital("Undefined")
+            console.log(e instanceof TypeError)  // true
+            console.log(e.message)               // "null has no properties"
+            console.log(e.name)                  // "TypeError"
+            console.log(e.fileName)              // "Scratchpad/1"
+            console.log(e.lineNumber)            // 2
+            console.log(e.columnNumber)          // 2
+            console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+          }
+          try {
+            setCapital(selectedCountry.capital[0]);
+        } catch (e) {
+            setCapital("Undefined")
+            console.log(e instanceof TypeError)  // true
+            console.log(e.message)               // "null has no properties"
+            console.log(e.name)                  // "TypeError"
+            console.log(e.fileName)              // "Scratchpad/1"
+            console.log(e.lineNumber)            // 2
+            console.log(e.columnNumber)          // 2
+            console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+          }
+          try {
+            setPopulation(selectedCountry.population);
+        } catch (e) {
+            setPopulation("Undefined")
+            console.log(e instanceof TypeError)  // true
+            console.log(e.message)               // "null has no properties"
+            console.log(e.name)                  // "TypeError"
+            console.log(e.fileName)              // "Scratchpad/1"
+            console.log(e.lineNumber)            // 2
+            console.log(e.columnNumber)          // 2
+            console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+        }
+        try {
+            setCurrency(
+              selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]
+                .name +
+                " (" +
+                selectedCountry.currencies[Object.keys(selectedCountry.currencies)[0]]
+                  .symbol +
+                ")"
+            );
+        } catch (e) {
+            setCurrency("Undefined")
+            console.log(e instanceof TypeError)  // true
+            console.log(e.message)               // "null has no properties"
+            console.log(e.name)                  // "TypeError"
+            console.log(e.fileName)              // "Scratchpad/1"
+            console.log(e.lineNumber)            // 2
+            console.log(e.columnNumber)          // 2
+            console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+        }
+
+    
   };
 
   const handleGoalChange = (event) => {
@@ -53,7 +112,8 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
       done: false,
       title: goal,
       body: description,
-      flag: flag
+      flag: flag,
+      location: location
     };
 
     onBucketSubmission(newBucket);
@@ -65,8 +125,10 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
     setGoal("");
     setDescription("");
     setFlag("");
+    setLocation("");
   };
   var countryNames = countries.map((country) => country.name.common).sort();
+  countryNames.unshift("Select Country Here")
 
   var options = countryNames.map((country) => {
     return <option value={country}>{country}</option>;
@@ -99,23 +161,25 @@ const BucketCreator = ({ countries, onBucketSubmission }) => {
                   <span class="w-1/2">
                     <img src={flag} alt={country.name} class="rounded-t-2xl object-contain h-40 w-full ..."/>
                     <p
-                      class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
+                      class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold"
                     >
                       Capital: {capital}
                     </p>
                     <p
-                      class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
+                      class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold"
                     >
                       Currency: {currency}
                     </p>
                     <p
-                      class="block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
+                      class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
                                   focus:outline-none text-white text-xs py-3 px-4 rounded font-bold"
                     >
                       Population: {population}
                     </p>
+                    <a class="text-center block uppercase mx-auto shadow bg-white text-indigo-600 focus:shadow-outline 
+                                  focus:outline-none text-white text-xs py-3 px-4 rounded font-bold" href={location} target="_blank">Open In Maps</a>
                   </span>
                 </div>
               </div>

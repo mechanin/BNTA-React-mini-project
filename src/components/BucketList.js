@@ -9,8 +9,11 @@ const BucketList = ({buckets}) =>{
     })
 
     return(
-        <div>
+        <div class="container mx-auto">
+        <div class="flex flex-wrap">
+            
             {bucketComponents}
+        </div>
         </div>
     )
 
